@@ -26,8 +26,6 @@ const CONFIG = {
 // ═══════════════════════════════════════════════════════════════
 //  CONSTANTES
 // ═══════════════════════════════════════════════════════════════
-const SEPARADOR       = "═".repeat(70);
-const SEPARADOR_FINO  = "─".repeat(70);
 const PASTA_HISTORICO = path.join(__dirname, "historico");
 
 // ═══════════════════════════════════════════════════════════════
@@ -161,11 +159,10 @@ function print(texto = "") {
 }
 
 function imprimirCabecalho(arquivo) {
-  print(SEPARADOR);
   print(`  RELATÓRIO DE ATIVIDADES EM ATRASO`);
   print(`  Gerado em: ${agora()}`);
-  print(`  Arquivo:   ${arquivo}`);
-  print(SEPARADOR);
+  print(`  Arquivo: ${arquivo}`);
+  print(" ");
 }
 
 function imprimirResumo(areas, dados) {
@@ -176,32 +173,29 @@ function imprimirResumo(areas, dados) {
 
   print();
   print(chalk.bold("  RESUMO GERAL"));
-  print(SEPARADOR_FINO);
-  print(`  Áreas identificadas : ${areas.length}`);
-  print(`  Total de atividades : ${totalAtividades}`);
-  print(`  Em atraso           : ${totalEmAtraso}`);
-  print(`  Percentual geral    : ${colorirPct(pctGeral)}`);
-  print(`  Atraso > ${CONFIG.atrasoGrave} dias   : ${totalGraves > 0 ? chalk.red(totalGraves) : chalk.green(totalGraves)}`);
-  print(SEPARADOR_FINO);
+  print(`  Áreas identificadas: ${areas.length}`);
+  print(`  Total de atividades: ${totalAtividades}`);
+  print(`  Em atraso: ${totalEmAtraso}`);
+  print(`  Percentual geral: ${colorirPct(pctGeral)}`);
+  print(`  Atraso > ${CONFIG.atrasoGrave} dias: ${totalGraves > 0 ? chalk.red(totalGraves) : chalk.green(totalGraves)}`);
+  print(" ");
 }
 
 function imprimirDetalhamento(areas) {
   print();
-  print(chalk.bold("  DETALHAMENTO POR ÁREA"));
+  print(chalk.bold("  DETALHAMENTO POR ÁREA:"));
 
   const criticas  = areas.filter(a => Number(a.pct) > CONFIG.percentualCritico);
   const normais   = areas.filter(a => Number(a.pct) <= CONFIG.percentualCritico);
 
   if (criticas.length) {
-    print();
-    print(chalk.red(`  ⚠  ÁREAS CRÍTICAS (acima de ${CONFIG.percentualCritico}%)`));
+    print(chalk.red(`  • ÁREAS CRÍTICAS (acima de ${CONFIG.percentualCritico}%): vermelho`));
   }
 
   for (const a of [...criticas, ...normais]) {
     const isCritica = Number(a.pct) > CONFIG.percentualCritico;
     print();
-    print(SEPARADOR_FINO);
-
+    
     const titulo = `  ${isCritica ? "🔴" : "📁"} ${a.nome}`;
     print(isCritica ? chalk.red(chalk.bold(titulo)) : chalk.bold(titulo));
     print(`     Total: ${a.total}  |  Em atraso: ${a.emAtraso}  |  Percentual: ${colorirPct(a.pct)}`);
@@ -212,7 +206,7 @@ function imprimirDetalhamento(areas) {
     }
   }
 
-  print(SEPARADOR_FINO);
+  print(" ");
 }
 
 function imprimirAtividadesGraves(areas) {
@@ -227,8 +221,8 @@ function imprimirAtividadesGraves(areas) {
   }
 
   print();
-  print(chalk.red(chalk.bold(`  ATIVIDADES COM ATRASO > ${CONFIG.atrasoGrave} DIAS (${graves.length} ocorrência(s))`)));
-  print(SEPARADOR_FINO);
+  print(chalk.red(chalk.bold(` ⚠️❗ ATIVIDADES COM ATRASO > ${CONFIG.atrasoGrave} DIAS (${graves.length} ocorrência(s)) ❗⚠️`)));
+  print(" ");
 
   let areaAtual = "";
   for (const g of graves) {
@@ -237,11 +231,12 @@ function imprimirAtividadesGraves(areas) {
       print(chalk.red(`  📁 ${g.area}`));
       areaAtual = g.area;
     }
-    print(chalk.red(`     [${g.tipo}] ${g.descricao}`));
-    print(chalk.red(`     Prazo: ${g.prazo}  |  Atraso: ${g.dias} dias`));
+    print(chalk.red(`    • [${g.tipo}]  |  Prazo: ${g.prazo}  |  Atraso: ${g.dias} dias`));
+    print(chalk.red(`      ${g.descricao}`));
+    print();
   }
 
-  print(SEPARADOR_FINO);
+  print(" ");
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -282,7 +277,7 @@ function main() {
   imprimirAtividadesGraves(areas);
 
   print();
-  print(SEPARADOR);
+  print(" ");
 
   const nomeHistorico = salvarTxt();
   console.log(chalk.cyan(`\n✅ relatorio.txt salvo na pasta do script.`));
