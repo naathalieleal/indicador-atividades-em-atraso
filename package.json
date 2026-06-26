@@ -1,0 +1,13 @@
+{
+  "name": "relatorio-atividades",
+  "version": "2.0.0",
+  "description": "Relatório de atividades em atraso por área, gerado no terminal a partir de planilha Excel.",
+  "main": "relatorio.js",
+  "scripts": {
+    "start": "node relatorio.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "xlsx": "^0.18.5"
+  }
+}
