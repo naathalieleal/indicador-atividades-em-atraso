@@ -1,7 +1,37 @@
 # Relatório de Atividades em Atraso
 
-Script gerado para identificar as atividades em atraso por área a partir de um arquivo em Excel gerado por um sistema.
-Contempla a elaboração/revisão de documentos, ações e análises de problemas.
+## Problema
+
+O indicador de atividades em atraso era obtido por meio de uma planilha Excel exportada do sistema.
+
+A análise exigia:
+
+• filtrar dados;
+• consolidar por área;
+• calcular percentuais;
+• identificar atividades críticas;
+• montar manualmente um relatório para os gestores.
+
+O processo era repetitivo e consumia tempo.
+
+## Solução
+
+Foi desenvolvida uma aplicação em Node.js que automatiza toda a consolidação das informações.
+
+A ferramenta:
+
+• lê automaticamente a planilha;
+
+• calcula os indicadores;
+
+• identifica áreas críticas;
+
+• lista atividades acima de 30 dias;
+
+• gera um relatório executivo para envio aos gestores.
+
+
+### Operação
 
 ```
 Salve o arquivo na pasta configurada em `CONFIG.pastaRelatorios`
