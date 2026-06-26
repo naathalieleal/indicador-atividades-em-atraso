@@ -1,37 +1,43 @@
 # Relatório de Atividades em Atraso
 
-## Problema
+### Problema
 
 O indicador de atividades em atraso era obtido por meio de uma planilha Excel exportada do sistema.
 
 A análise exigia:
 
-• filtrar dados;
-• consolidar por área;
-• calcular percentuais;
-• identificar atividades críticas;
-• montar manualmente um relatório para os gestores.
+   • filtrar dados;
+
+   • consolidar por área;
+
+   • calcular percentuais;
+
+   • identificar atividades críticas;
+
+   • montar manualmente um relatório para os gestores.
 
 O processo era repetitivo e consumia tempo.
 
-## Solução
+
+
+### Solução
 
 Foi desenvolvida uma aplicação em Node.js que automatiza toda a consolidação das informações.
 
 A ferramenta:
 
-• lê automaticamente a planilha;
+   • lê automaticamente a planilha;
 
-• calcula os indicadores;
+   • calcula os indicadores;
 
-• identifica áreas críticas;
+   • identifica áreas críticas;
 
-• lista atividades acima de 30 dias;
+   • lista atividades acima de 30 dias;
 
-• gera um relatório executivo para envio aos gestores.
+   • gera um relatório executivo para envio aos gestores.
 
 
-### Operação
+## Operação
 
 ```
 Salve o arquivo na pasta configurada em `CONFIG.pastaRelatorios`
